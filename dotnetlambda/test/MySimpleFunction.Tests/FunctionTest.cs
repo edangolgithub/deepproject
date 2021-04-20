@@ -8,6 +8,8 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.TestUtilities;
 
 using MySimpleFunction;
+using Amazon.Lambda.APIGatewayEvents;
+using Newtonsoft.Json;
 
 namespace MySimpleFunction.Tests
 {
@@ -23,9 +25,12 @@ namespace MySimpleFunction.Tests
             NewUser user= new NewUser();
             user.firstName="evan";
             user.surname="dangol";
-            var userresponse = function.FunctionHandler(user, context);
+            APIGatewayProxyRequest request= new APIGatewayProxyRequest();
+            request.Body=JsonConvert.SerializeObject(user);
+            var userresponse = function.FunctionHandler(request, context);
 
-            Console.WriteLine(userresponse);
+            Console.WriteLine(userresponse.Body);
+             System.Diagnostics.Debug.WriteLine(userresponse);
         }
     }
 }
