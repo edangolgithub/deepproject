@@ -9,6 +9,7 @@ using Amazon.Lambda.TestUtilities;
 using Amazon.Lambda.APIGatewayEvents;
 
 using dotnetserverless;
+using Newtonsoft.Json;
 
 namespace dotnetserverless.Tests
 {
@@ -30,9 +31,12 @@ namespace dotnetserverless.Tests
 
             request = new APIGatewayProxyRequest();
             context = new TestLambdaContext();
+            var param = new { fun = "listadmin", Message = "Hello",data="this is data" };  
+            request.Body=JsonConvert.SerializeObject(param);
             response = functions.Get(request, context);
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("Hello AWS Serverless", response.Body);
+            Console.WriteLine(response.Body);
+           // Assert.Equal("Hello AWS Serverless", response.Body);
         }
     }
 }

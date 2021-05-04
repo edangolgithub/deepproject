@@ -7,11 +7,11 @@ using Xunit;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.TestUtilities;
 
-using MySimpleFunction;
+using DotNetLambda;
 using Amazon.Lambda.APIGatewayEvents;
 using Newtonsoft.Json;
 
-namespace MySimpleFunction.Tests
+namespace DotNetLambda.Tests
 {
     public class FunctionTest
     {
